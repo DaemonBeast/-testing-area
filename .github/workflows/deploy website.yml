@@ -1,0 +1,26 @@
+name: Deploy website
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'docs/**'
+    
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 2
+    
+    - name: FTP transfer
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      with:
+        ftp-server: ftp://ftpupload.net
+        ftp-username: epiz_26012918
+        ftp-password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: docs/
