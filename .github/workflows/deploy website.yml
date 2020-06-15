@@ -20,7 +20,8 @@ jobs:
     - name: FTP transfer
       uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
-        ftp-server: ftp://ftpupload.net
+        ftp-server: ftp://ftpupload.net/htdocs
         ftp-username: epiz_26012918
         ftp-password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: docs/
+        git-ftp-args: --insecure
+        local-dir: docs
