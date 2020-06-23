@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1">
-    <title>Hello</title>
+    <title>A blog post</title>
   </head>
   <body>
     <h1>Hello!</h1>
@@ -15,9 +15,7 @@
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
-      Parse.Cloud.run('incrementViews', { index: 0 }).then((res) => {
-        alert(res);
-      });
+      Parse.Cloud.run('incrementViews', { name: document.getElementsByClassName('title')[0] });
     </script>
   </body>
 </html>
