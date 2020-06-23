@@ -45,8 +45,8 @@
       });
 
       document.getElementById('submitComment').addEventListener('click', () => {
-        const username = document.getElementById('name');
-        const comment = document.getElementById('comment');
+        const username = document.getElementById('name').value;
+        const comment = document.getElementById('comment').value;
 
         Parse.Cloud.run('addComment', {
           name: document.title,
