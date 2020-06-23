@@ -10,27 +10,58 @@
     <h1>
       <script>
         document.write(document.title);
+        document.currentScript.remove();
       </script>
     </h1>
-    <p id='views'>Views: <i>LOADING</i></p>
-    <p id='comments'>Comments: <i>LOADING</i></p>
+    <p>Views: <i>LOADING</i></p>
+    <h2>Comments</h2>
+    <div id="comments"></div>
+
+    <form id="addComment">
+      <label for="name">Name:</label>
+      <input id="name" type="text">
+      <label for="comment">Comment:</label>
+      <input id="comment" type="text">
+      <button id="submitComment" type="button">Submit</button>
+    </form>
 
     <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script type="text/javascript">
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
-      Parse.Cloud.run('incrementViews', { name: document.title }).then((res) => {
+      Parse.Cloud.run('incrementViews', {
+        name: document.title
+      }).then((res) => {
         document.getElementById('views').innerText = `Views: ${ res.views }`;
-        document.getElementById('comments').innerText = `Comments: ${ res.comments }`;
+        document.getElementById('comments').innerText = res.comments.reverse().reduce((acc, value) => {
+          acc += `
+            <div>
+              <b>${ value.name }</b>
+              <p>${ value.comment }</p>
+            </div>
+          `;
+        }, '');
       });
 
-      /*const query = Parse.Query('Posts');
-      query.equalTo('name', document.getElementsByClassName('title')[0]);
-      const post = query.first();
+      document.getElementById('submitComment').addEventListener('click', () => {
+        const form = document.getElementById('addComment');
+        const username = form.getElementById('name');
+        const comment = form.getElementById('comment');
 
-      document.getElementById('views').innerText = res.views;
-      document.getElementById('comments').innerText = res.comments;*/
+        Parse.Cloud.run('addComment', {
+          name: document.title,
+          username,
+          comment
+        }).then((res) => {
+          document.getElementById('comments').innerHTML = `
+            <div>
+              <b>${ res.name }</b>
+              <p>${ res.comment }</p>
+            </div>
+          ` + document.getElementById('comments').innerHTML;
+        });
+      });
     </script>
   </body>
 </html>
