@@ -17,7 +17,7 @@
     <h2>Comments</h2>
     <div id="comments"></div>
 
-    <form id="addComment">
+    <form>
       <label for="name">Name:</label>
       <input id="name" type="text">
       <label for="comment">Comment:</label>
@@ -45,9 +45,8 @@
       });
 
       document.getElementById('submitComment').addEventListener('click', () => {
-        const form = document.getElementById('addComment');
-        const username = form.getElementById('name');
-        const comment = form.getElementById('comment');
+        const username = document.getElementById('name');
+        const comment = document.getElementById('comment');
 
         Parse.Cloud.run('addComment', {
           name: document.title,
