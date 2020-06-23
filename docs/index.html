@@ -4,6 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1">
+    <link rel="stylesheet" href="stylesheet.css">
     <title>A blog post</title>
   </head>
   <body>
@@ -33,11 +34,10 @@
       Parse.Cloud.run('incrementViews', {
         name: document.title
       }).then((res) => {
-        console.log(res);
         document.getElementById('views').innerText = `Views: ${ res.views }`;
         document.getElementById('comments').innerText = res.comments.reverse().reduce((acc, value) => {
-          acc += `
-            <div>
+          return acc + `
+            <div class="comment">
               <b>${ value.name }</b>
               <p>${ value.comment }</p>
             </div>
@@ -54,9 +54,8 @@
           username,
           comment
         }).then((res) => {
-          console.log(res);
           document.getElementById('comments').innerHTML = `
-            <div>
+            <div class="comment">
               <b>${ res.name }</b>
               <p>${ res.comment }</p>
             </div>
