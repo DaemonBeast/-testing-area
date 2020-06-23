@@ -33,6 +33,7 @@
       Parse.Cloud.run('incrementViews', {
         name: document.title
       }).then((res) => {
+        console.log(res);
         document.getElementById('views').innerText = `Views: ${ res.views }`;
         document.getElementById('comments').innerText = res.comments.reverse().reduce((acc, value) => {
           acc += `
