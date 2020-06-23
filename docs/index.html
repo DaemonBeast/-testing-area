@@ -7,15 +7,23 @@
     <title>A blog post</title>
   </head>
   <body>
-    <h1>Hello!</h1>
-    <p>Plz work 😆</p>
+    <h1>A blog post</h1>
+    <p id='views'>Views: <i>LOADING</i></p>
+    <p id='comments'>Comments: <i>LOADING</i></p>
 
     <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script type="text/javascript">
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
-      Parse.Cloud.run('incrementViews', { name: document.getElementsByClassName('title')[0] });
+      Parse.Cloud.run('incrementViews', { name: document.getElementsByClassName('title')[0] }).then((res) => {
+        document.getElementById('views').innerText = res.views;
+        document.getElementById('comments').innerText = res.comments;
+      });
+
+      /*const query = Parse.Query('Posts');
+      query.equalTo('name', document.getElementsByClassName('title')[0]);
+      const post = query.first();*/
     </script>
   </body>
 </html>
