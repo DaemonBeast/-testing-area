@@ -16,7 +16,7 @@
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
-      Parse.Cloud.run('incrementViews', { name: document.getElementsByClassName('title')[0] }).then((res) => {
+      Parse.Cloud.run('incrementViews', { name: document.getElementsByClassName('title')[0] }).success((res) => {
         /*document.getElementById('views').innerText = res.views;
         document.getElementById('comments').innerText = res.comments;*/
         console.log(res);
