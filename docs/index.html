@@ -17,8 +17,9 @@
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
       Parse.Cloud.run('incrementViews', { name: document.getElementsByClassName('title')[0] }).then((res) => {
-        document.getElementById('views').innerText = res.views;
-        document.getElementById('comments').innerText = res.comments;
+        /*document.getElementById('views').innerText = res.views;
+        document.getElementById('comments').innerText = res.comments;*/
+        console.log(res);
       });
 
       /*const query = Parse.Query('Posts');
