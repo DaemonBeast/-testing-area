@@ -35,7 +35,7 @@
         name: document.title
       }).then((res) => {
         document.getElementById('views').innerText = `Views: ${ res.views }`;
-        document.getElementById('comments').innerText = res.comments.reverse().reduce((acc, value) => {
+        document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
           return acc + `
             <div class="comment">
               <b>${ value.name }</b>
