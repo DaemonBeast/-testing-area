@@ -30,10 +30,10 @@
         return html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
       }
 
-      function incrementViews(type) {
+      function incrementViews(types) {
         Parse.Cloud.run('incrementViews', {
           name: document.title,
-          type
+          types
         }).then((res) => {
           getViewsAndComments();
         });
@@ -63,12 +63,12 @@
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
       if (/bot|crawl|spider/i.test(navigator.userAgent)) {
-        incrementViews('bot');
+        incrementViews(['all', 'bot']);
       } else if (localStorage.getItem(document.title + 'viewed')) {
-        incrementViews('all');
+        incrementViews(['all']);
       } else {
         localStorage.setItem(document.title + 'viewed', true);
-        incrementViews('unique');
+        incrementViews(['all', 'unique']);
       }
 
       document.getElementById('submitComment').addEventListener('click', () => {
