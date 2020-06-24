@@ -8,12 +8,7 @@
     <title>A blog post</title>
   </head>
   <body>
-    <h1>
-      <script>
-        document.write(document.title);
-        document.currentScript.remove();
-      </script>
-    </h1>
+    <h1></h1>
     <p id="views">Views: 0</p>
     <h2>Comments</h2>
     <div id="comments"></div>
@@ -28,6 +23,8 @@
 
     <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script type="text/javascript">
+      document.getElementsByClassName('h1')[0].innerText = document.title;
+
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
