@@ -64,10 +64,10 @@
       
       if (/bot|crawl|spider/i.test(navigator.userAgent)) {
         incrementViews('bot');
-      } else if (localStorage.getItem('viewed')) {
+      } else if (localStorage.getItem(document.title + 'viewed')) {
         incrementViews('all');
       } else {
-        localStorage.setItem('viewed', true);
+        localStorage.setItem(document.title + 'viewed', true);
         incrementViews('unique');
       }
 
