@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap">
     <link rel="stylesheet" href="stylesheet.css">
     <title>A Blog Post</title>
   </head>
@@ -62,7 +62,7 @@
           } else {
             document.getElementById('comments').classList.remove('faded');
             document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
-              return acc + `<div class="comment"><b>${ value.name }</b><p>${ value.comment }</p></div>`;
+              return acc + `<div class="comment"><b>${ value.name }</b><p>${ value.comment }</p><small>${ res.time }</small></div>`;
             }, '');
           }
         });
@@ -93,9 +93,9 @@
 
           if (document.getElementById('comments').innerText === 'There are currently no comments.') {
             document.getElementById('comments').classList.remove('faded');
-            document.getElementById('comments').innerHTML = `<div class="comment"><b>${ username }</b><p>${ comment }</p></div>`;
+            document.getElementById('comments').innerHTML = `<div class="comment"><b>${ username }</b><p>${ comment }</p><small>${ res.time }</small></div>`;
           } else {
-            document.getElementById('comments').innerHTML = `<div class="comment"><b>${ username }</b><p>${ comment }</p></div>`
+            document.getElementById('comments').innerHTML = `<div class="comment"><b>${ username }</b><p>${ comment }</p><small>${ res.time }</small></div>`
             + document.getElementById('comments').innerHTML;
           }
         });

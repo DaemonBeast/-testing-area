@@ -75,34 +75,43 @@ form > button {
     background: #eeeeee;
 
     font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 0 0 5px 2px #cccccc;
 }
 
 .comment {
     padding: 10px;
 
-    border-width: 1px 0 1px 0;
+    border-width: 1px 1px 1px 1px;
     border-style: solid;
-    border-color: #888888;
+    border-color: #cccccc;
+
+    background: #eeeeee;
+
+    font-size: 16px;
 
     white-space: pre-line;
 }
 
 .comment + .comment {
-    border-width: 0 0 1px 0;
+    border-width: 0 1px 1px 1px;
 }
 
 .comment > p {
-    margin: 10px 0 0 0;
+    margin: 0;
+
+    font-size: 16px;
 }
 
 .faded {
-    color: #888888;
+    color: #666666;
 }
 
 #allViews, #uniqueViews, #botViews {
     margin: 0 20px 20px 20px;
 
-    color: #888888;
+    color: #666666;
 }
 
 #body {
