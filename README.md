@@ -15,5 +15,5 @@ A place for me to test GitHub features that I have not used before, so that I kn
 
 ## Tests
 
-- [**Example blog post**](https://testing-area.netlify.app/)<br>
-  <sup>Illustrates the use of a dynamic view count and comments section using <https://www.back4app.com>.</sup>
+- [**Example Blog Post**](https://testing-area.netlify.app/)<br>
+  Illustrates the use of a dynamic view count and comments section using <https://www.back4app.com>. The site is hosted on [Netlify](https://www.netlify.com/), but the example also works on [GitHub pages](https://daemonbeast.github.io/Testing-Area/).
