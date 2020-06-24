@@ -4,23 +4,33 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400;1,500&display=swap">
     <link rel="stylesheet" href="stylesheet.css">
-    <title>A blog post</title>
+    <title>A Blog Post</title>
   </head>
   <body>
-    <h1></h1>
-    <span id="allViews">All Views: <span class="fas fa-spinner fa-spin"></span> LOADING</span>
-    <span id="uniqueViews">Unique Views: <span class="fas fa-spinner fa-spin"></span> LOADING</span>
-    <span id="botViews">Bot Views: <span class="fas fa-spinner fa-spin"></span> LOADING</span>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae augue augue. Etiam nibh turpis, egestas eu diam nec, hendrerit fermentum est. Nullam sodales velit urna, a ornare magna sagittis at. Cras at augue at ante varius iaculis mollis eget quam. Sed id metus orci. Phasellus porta scelerisque leo, at tristique est mollis non. Mauris imperdiet augue eu eros suscipit tincidunt ut sit amet tortor. Ut imperdiet dui sit amet leo fringilla egestas. Vestibulum eleifend euismod mauris nec scelerisque. Vivamus aliquet tortor nisi, eget maximus sem sagittis sit amet. Nullam pretium eget mi sed semper. In quis ipsum vitae neque vehicula vehicula. Nulla a imperdiet urna. Aliquam rutrum semper sapien, eu maximus metus scelerisque eget. Phasellus pharetra ornare lacus, ac ornare velit ultricies a.</p>
-    <h2>Comments</h2>
-    <div id="comments"><span class="fas fa-spinner fa-spin"></span> LOADING</div>
+    <h1><script> document.write(document.title); </script></h1>
+    <span id="allViews">All Views: <span class="fas fa-spinner fa-spin"></span></span>
+    <span id="uniqueViews">Unique Views: <span class="fas fa-spinner fa-spin"></span></span>
+    <span id="botViews">Bot Views: <span class="fas fa-spinner fa-spin"></span></span>
+    <p id="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec est hendrerit, gravida erat vitae, eleifend odio. Praesent cursus pharetra velit et congue. Vestibulum semper semper nisl, ac porta magna commodo nec. Donec non nisl nulla. Nunc sit amet est vitae est lacinia fermentum non in nunc. Praesent rutrum tempus nunc, rhoncus condimentum justo blandit sit amet. Nam nec varius ante. Phasellus sit amet turpis ut orci dapibus luctus. Nullam ac leo quis erat mattis efficitur iaculis eget sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
 
+      Proin feugiat libero posuere, lacinia arcu non, bibendum erat. Quisque mollis at tellus at venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nunc rutrum ante in aliquet semper. Curabitur ac velit sed odio tempor suscipit. Nullam gravida eros vel massa egestas, vel tincidunt nibh iaculis. Nam orci mauris, mattis efficitur tempor ut, iaculis et odio. Ut at nunc ut purus porta luctus eget ac mi.
+      
+      Duis at risus euismod felis convallis molestie sed sit amet eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eget odio sed sapien viverra imperdiet. Nunc blandit eget mi eget ultricies. Integer varius dignissim posuere. Aenean non congue nisi. Phasellus finibus metus eleifend purus fringilla pellentesque.
+      
+      Proin placerat, lacus eu mollis posuere, urna turpis accumsan nibh, ut varius tortor purus a felis. Sed id libero egestas, condimentum diam ut, pharetra mi. Proin id augue eu arcu cursus molestie. Mauris sit amet sapien lacinia, ornare dolor non, placerat ante. Maecenas eu dui in ex hendrerit convallis ullamcorper ac sem. Vestibulum nec felis dapibus, ullamcorper leo ut, suscipit dolor. Vivamus pellentesque convallis sapien, cursus sollicitudin urna ultrices lacinia. Phasellus pharetra nisl ligula, ac finibus lorem lacinia sit amet. Mauris porttitor venenatis magna viverra auctor.
+      
+      Aenean id ipsum ullamcorper metus porttitor convallis. Proin convallis justo at leo dignissim elementum. Cras ultrices urna leo, in auctor elit vestibulum vel. Morbi rutrum nibh ut odio luctus vestibulum. Praesent tortor neque, lacinia sit amet cursus ut, semper non mi. Sed feugiat magna tellus, a suscipit libero tincidunt sed. Cras at pulvinar risus. Vestibulum ut nunc vitae erat porttitor iaculis vitae quis nibh.</p>
+    <h2>Comments</h2>
+    <div id="comments" class="faded"><span class="fas fa-spinner fa-spin"></span> LOADING</div>
+
+    <h3>Add Comment</h3>
     <form>
-      <label for="name">Name:</label>
+      <label for="name">Name</label>
       <input id="name" type="text">
-      <label for="comment">Comment:</label>
-      <input id="comment" type="text">
+      <label for="comment">Comment</label>
+      <textarea id="comment" rows="5"></textarea>
       <button id="submitComment" type="button">Submit</button>
     </form>
 
@@ -47,28 +57,26 @@
           document.getElementById('allViews').innerText = `All Views: ${ res.allViews }`;
           document.getElementById('uniqueViews').innerText = `Unique Views: ${ res.uniqueViews }`;
           document.getElementById('botViews').innerText = `Bot Views: ${ res.botViews }`;
-          document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
-            return acc + `
-              <div class="comment">
-                <b>${ value.name }</b>
-                <p>${ value.comment }</p>
-              </div>
-            `;
-          }, '');
+          if (res.comments.length === 0) {
+            document.getElementById('comments').innerText = 'There are currently no comments.';
+          } else {
+            document.getElementById('comments').classList.remove('faded');
+            document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
+              return acc + `<div class="comment"><b>${ value.name }</b><p>${ value.comment }</p></div>`;
+            }, '');
+          }
         });
       }
-
-      document.getElementsByTagName('h1')[0].innerText = document.title;
 
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
       if (/bot|crawl|spider/i.test(navigator.userAgent)) {
         incrementViews(['all', 'bot']);
-      } else if (localStorage.getItem(document.title + 'viewed')) {
+      } else if (localStorage.getItem('Post "' + document.title + '" viewed')) {
         incrementViews(['all']);
       } else {
-        localStorage.setItem(document.title + 'viewed', true);
+        localStorage.setItem('Post "' + document.title + '" viewed', true);
         incrementViews(['all', 'unique']);
       }
 
@@ -81,12 +89,15 @@
           username,
           comment
         }).then((res) => {
-          document.getElementById('comments').innerHTML = `
-            <div class="comment">
-              <b>${ username }</b>
-              <p>${ comment }</p>
-            </div>
-          ` + document.getElementById('comments').innerHTML;
+          document.getElementById('comment').value = '';
+
+          if (document.getElementById('comments').innerText === 'There are currently no comments.') {
+            document.getElementById('comments').classList.remove('faded');
+            document.getElementById('comments').innerHTML = `<div class="comment"><b>${ username }</b><p>${ comment }</p></div>`;
+          } else {
+            document.getElementById('comments').innerHTML = `<div class="comment"><b>${ username }</b><p>${ comment }</p></div>`
+            + document.getElementById('comments').innerHTML;
+          }
         });
       });
     </script>
