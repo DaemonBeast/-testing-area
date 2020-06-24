@@ -34,6 +34,26 @@
         Parse.Cloud.run('incrementViews', {
           name: document.title,
           type
+        }).then((res) => {
+          getViewsAndComments();
+        });
+      }
+
+      function getViewsAndComments() {
+        Parse.Cloud.run('getViewsAndComments', {
+          name: document.title
+        }).then((res) => {
+          document.getElementById('allViews').innerText = `All Views: ${ res.allViews }`;
+          document.getElementById('uniqueViews').innerText = `Unique Views: ${ res.uniqueViews }`;
+          document.getElementById('botViews').innerText = `Bot Views: ${ res.botViews }`;
+          document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
+            return acc + `
+              <div class="comment">
+                <b>${ value.name }</b>
+                <p>${ value.comment }</p>
+              </div>
+            `;
+          }, '');
         });
       }
 
@@ -50,24 +70,6 @@
         localStorage.setItem('viewed', true);
         incrementViews('unique');
       }
-
-      // NEED TO SHOW DIFFERENT VIEWS
-
-      Parse.Cloud.run('getViewsAndComments', {
-        name: document.title
-      }).then((res) => {
-        document.getElementById('allViews').innerText = `All Views: ${ res.allViews }`;
-        document.getElementById('uniqueViews').innerText = `Unique Views: ${ res.uniqueViews }`;
-        document.getElementById('botViews').innerText = `Bot Views: ${ res.botViews }`;
-        document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
-          return acc + `
-            <div class="comment">
-              <b>${ value.name }</b>
-              <p>${ value.comment }</p>
-            </div>
-          `;
-        }, '');
-      });
 
       document.getElementById('submitComment').addEventListener('click', () => {
         const username = document.getElementById('name').value;
