@@ -6,7 +6,7 @@ A place for me to test GitHub features that I have not used before, so that I kn
 
 <p align="center">🚧⠀⠀🚧⠀⠀🚧</p>
 
-**<p align="center">This place is for testing only and therefore, I will be unlikely to respond to any Pull Requests or issues opened. 
+**<p align="center">This place is for testing only and therefore, I will be unlikely to respond to any Pull Requests or issues opened.
 <br>That doesn't mean you can't open them, I'll just be very unlikely to take any notice.</p>**
 
 <p align="center">🚧⠀⠀🚧⠀⠀🚧</p>
@@ -16,4 +16,4 @@ A place for me to test GitHub features that I have not used before, so that I kn
 ## Tests
 
 - [**Example Blog Post**](https://testing-area.netlify.app/)<br>
-  Illustrates the use of a dynamic view count and comments section using <https://www.back4app.com>. The site is hosted on [Netlify](https://www.netlify.com/), but the example also works on [GitHub pages](https://daemonbeast.github.io/Testing-Area/).
+  Illustrates the use of a dynamic view count and comments section using [Back4App](https://www.back4app.com). The site is hosted on [Netlify](https://www.netlify.com/), but the example also works on [GitHub Pages](https://daemonbeast.github.io/Testing-Area/).
