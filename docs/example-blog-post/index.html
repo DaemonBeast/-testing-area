@@ -28,14 +28,28 @@
         return html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
       }
 
+      function incrementViews(type) {
+        Parse.Cloud.run('incrementViews', {
+          name: document.title,
+          type
+        });
+      }
+
       document.getElementsByTagName('h1')[0].innerText = document.title;
 
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
-      Parse.Cloud.run('incrementViews', {
-        name: document.title
-      });
+      if (/bot|crawl|spider/i.test(navigator.userAgent)) {
+        incrementViews('bot');
+      } else if (localStorage.getItem('viewed')) {
+        incrementViews('repeat');
+      } else {
+        localStorage.setItem('viewed', true);
+        incrementViews('new');
+      }
+
+      // NEED TO SHOW DIFFERENT VIEWS
 
       Parse.Cloud.run('getViewsAndComments', {
         name: document.title
