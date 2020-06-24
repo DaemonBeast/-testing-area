@@ -62,7 +62,7 @@
           } else {
             document.getElementById('comments').classList.remove('faded');
             document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
-              return acc + `<div class="comment"><b>${ value.name }</b><p>${ value.comment }</p><small>${ res.time }</small></div>`;
+              return acc + `<div class="comment"><b>${ value.name }</b><p>${ value.comment }</p><small>${ value.time }</small></div>`;
             }, '');
           }
         });
