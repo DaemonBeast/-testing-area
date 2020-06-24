@@ -10,6 +10,7 @@
   <body>
     <h1></h1>
     <p id="views">Views: 0</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae augue augue. Etiam nibh turpis, egestas eu diam nec, hendrerit fermentum est. Nullam sodales velit urna, a ornare magna sagittis at. Cras at augue at ante varius iaculis mollis eget quam. Sed id metus orci. Phasellus porta scelerisque leo, at tristique est mollis non. Mauris imperdiet augue eu eros suscipit tincidunt ut sit amet tortor. Ut imperdiet dui sit amet leo fringilla egestas. Vestibulum eleifend euismod mauris nec scelerisque. Vivamus aliquet tortor nisi, eget maximus sem sagittis sit amet. Nullam pretium eget mi sed semper. In quis ipsum vitae neque vehicula vehicula. Nulla a imperdiet urna. Aliquam rutrum semper sapien, eu maximus metus scelerisque eget. Phasellus pharetra ornare lacus, ac ornare velit ultricies a.</p>
     <h2>Comments</h2>
     <div id="comments"></div>
 
@@ -23,12 +24,20 @@
 
     <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
     <script type="text/javascript">
-      document.getElementsByClassName('h1')[0].innerText = document.title;
+      function escapeHTML(html) {
+        return html.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+      }
+
+      document.getElementsByTagName('h1')[0].innerText = document.title;
 
       Parse.initialize("55LsP3jDMhMzJ5k9J3wqpZ8ebMUrGkcgaj17Pfgz","AjXQYFg6wIhUMunRYpGvoRdNsliOZxRYMFG6FsX7"); //PASTE HERE YOUR Back4App APPLICATION ID AND YOUR JavaScript KEY
       Parse.serverURL = 'https://parseapi.back4app.com/'
       
       Parse.Cloud.run('incrementViews', {
+        name: document.title
+      });
+
+      Parse.Cloud.run('getViewsAndComments', {
         name: document.title
       }).then((res) => {
         document.getElementById('views').innerText = `Views: ${ res.views }`;
@@ -44,7 +53,7 @@
 
       document.getElementById('submitComment').addEventListener('click', () => {
         const username = document.getElementById('name').value;
-        const comment = document.getElementById('comment').value;
+        const comment = escapeHTML(document.getElementById('comment').value);
 
         Parse.Cloud.run('addComment', {
           name: document.title,
@@ -53,8 +62,8 @@
         }).then((res) => {
           document.getElementById('comments').innerHTML = `
             <div class="comment">
-              <b>${ res.name }</b>
-              <p>${ res.comment }</p>
+              <b>${ username }</b>
+              <p>${ comment }</p>
             </div>
           ` + document.getElementById('comments').innerHTML;
         });
