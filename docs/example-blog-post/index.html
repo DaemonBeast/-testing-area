@@ -23,8 +23,6 @@
       
       Aenean id ipsum ullamcorper metus porttitor convallis. Proin convallis justo at leo dignissim elementum. Cras ultrices urna leo, in auctor elit vestibulum vel. Morbi rutrum nibh ut odio luctus vestibulum. Praesent tortor neque, lacinia sit amet cursus ut, semper non mi. Sed feugiat magna tellus, a suscipit libero tincidunt sed. Cras at pulvinar risus. Vestibulum ut nunc vitae erat porttitor iaculis vitae quis nibh.</p>
     <h2>Comments</h2>
-    <div id="comments" class="faded"><span class="fas fa-spinner fa-spin"></span> LOADING</div>
-
     <h3>Add Comment</h3>
     <form>
       <label for="name">Name</label>
@@ -33,6 +31,8 @@
       <textarea id="comment" rows="5"></textarea>
       <button id="submitComment" type="button">Submit</button>
     </form>
+    <button id="refresh"><span class="fas fa-sync-alt"></span> Refresh</button>
+    <div id="comments" class="faded"><span class="fas fa-spinner fa-spin"></span> Loading</div>
 
     <script src="https://kit.fontawesome.com/617f7aefb4.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js"></script>
@@ -50,21 +50,25 @@
         });
       }
 
-      function getViewsAndComments() {
-        Parse.Cloud.run('getViewsAndComments', {
-          name: document.title
-        }).then((res) => {
-          document.getElementById('allViews').innerText = `All Views: ${ res.allViews }`;
-          document.getElementById('uniqueViews').innerText = `Unique Views: ${ res.uniqueViews }`;
-          document.getElementById('botViews').innerText = `Bot Views: ${ res.botViews }`;
-          if (res.comments.length === 0) {
-            document.getElementById('comments').innerText = 'There are currently no comments.';
-          } else {
-            document.getElementById('comments').classList.remove('faded');
-            document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
-              return acc + `<div class="comment"><b>${ value.name }</b><p>${ value.comment }</p><small>${ value.time }</small></div>`;
-            }, '');
-          }
+      async function getViewsAndComments() {
+        return new Promise(resolve => {
+          Parse.Cloud.run('getViewsAndComments', {
+            name: document.title
+          }).then((res) => {
+            document.getElementById('allViews').innerText = `All Views: ${ res.allViews }`;
+            document.getElementById('uniqueViews').innerText = `Unique Views: ${ res.uniqueViews }`;
+            document.getElementById('botViews').innerText = `Bot Views: ${ res.botViews }`;
+            if (res.comments.length === 0) {
+              document.getElementById('comments').innerText = 'There are currently no comments.';
+            } else {
+              document.getElementById('comments').classList.remove('faded');
+              document.getElementById('comments').innerHTML = res.comments.reverse().reduce((acc, value) => {
+                return acc + `<div class="comment"><b>${ value.name }</b><p>${ value.comment }</p><small>${ value.time }</small></div>`;
+              }, '');
+            }
+
+            resolve();
+          });
         });
       }
 
@@ -98,6 +102,14 @@
             document.getElementById('comments').innerHTML = `<div class="comment"><b>${ username }</b><p>${ comment }</p><small>${ res.time }</small></div>`
             + document.getElementById('comments').innerHTML;
           }
+        });
+      });
+
+      const refresh = document.getElementById('refresh');
+      refresh.addEventListener('click', () => {
+        refresh.innerHTML = '<span class="fas fa-sync-alt fa-spin"></span> Refreshing';
+        getViewsAndComments().then(() => {
+          refresh.innerHTML = '<span class="fas fa-sync-alt"></span> Refresh';
         });
       });
     </script>

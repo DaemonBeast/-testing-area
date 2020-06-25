@@ -3,6 +3,7 @@ html, body {
     height: 100%;
 
     margin: 0;
+    padding: 10px;
 
     box-sizing: border-box;
 }
@@ -18,16 +19,16 @@ p {
 
 h1, h2 {
     margin: 0;
-    padding: 20px 0 10px 20px;
+    padding: 0 0 10px 0;
 }
 
 h3 {
     margin: 0;
-    padding: 20px 0 0 20px;
+    padding: 20px 0 0 0;
 }
 
 form {
-    margin: 20px;
+    margin: 20px 0;
 }
 
 label {
@@ -118,17 +119,36 @@ small {
 }
 
 #allViews, #uniqueViews, #botViews {
-    margin: 0 20px 20px 20px;
+    margin: 0 20px 20px 0;
 
     color: #666666;
 }
 
 #body {
-    margin: 50px 20px 20px 20px;
+    margin: 50px 0 20px 0;
 
     white-space: pre-line;
 }
 
 #comments {
-    margin: 20px;
+    margin: 20px 0;
+}
+
+#refresh {
+    margin: 20px 0 0 0;
+
+    border: 0;
+    background: 0;
+
+    color: #6666dd;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+#refresh:hover {
+    color: #8888ff;
+
+    text-decoration: underline;
 }
