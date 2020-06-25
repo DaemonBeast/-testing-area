@@ -89,6 +89,12 @@ small {
     color: #666666;
 }
 
+p {
+    display: inline-block;
+
+    margin: 0;
+}
+
 .comment {
     padding: 10px;
 
@@ -106,6 +112,8 @@ small {
 }
 
 .comment > p {
+    display: block;
+
     margin: 0;
 
     font-size: 16px;
@@ -124,14 +132,26 @@ small {
     color: #666666;
 }
 
+#allViews > *, #uniqueViews > *, #botViews > * {
+  font-size: 16px;
+}
+
 #body {
     margin: 50px 0 20px 0;
+}
 
-    white-space: pre-line;
+#body > p {
+    margin: 0 0 1.5rem 0;
 }
 
 #comments {
     margin: 20px 0;
+}
+
+#addCommentError {
+  margin: 10px 0;
+
+  color: #bb4444;
 }
 
 #refresh {
