@@ -50,7 +50,7 @@ input[type="text"], textarea {
 
     font-size: 16px;
 
-    box-shadow: 0 0 5px 2px inset #cccccc;
+    box-shadow: 0 2px 5px inset #cccccc;
 
     box-sizing: border-box;
     -webkit-appearance: none;
@@ -79,7 +79,7 @@ form > button {
     font-size: 16px;
     font-weight: bold;
 
-    box-shadow: 0 0 5px 2px #cccccc;
+    box-shadow: 0 -10px 10px inset #cccccc;
 }
 
 small {
@@ -159,6 +159,7 @@ p {
 
 #refresh {
     margin: 20px 0 0 0;
+    padding: 0;
 
     border: 0;
     background: 0;
