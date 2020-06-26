@@ -11,6 +11,8 @@ html, body {
 body * {
     font-family: 'Open Sans', sans-serif;
     line-height: 1.5;
+
+    -webkit-text-size-adjust: 100%;
 }
 
 p {
