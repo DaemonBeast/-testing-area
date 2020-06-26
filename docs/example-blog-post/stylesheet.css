@@ -112,6 +112,8 @@ p {
     border-width: 0 1px 1px 1px;
 }
 
+
+
 .comment > p {
     display: block;
 
@@ -146,7 +148,7 @@ p {
 }
 
 #comments {
-    margin: 20px 0;
+    padding: 20px 0;
 }
 
 #addCommentError {
