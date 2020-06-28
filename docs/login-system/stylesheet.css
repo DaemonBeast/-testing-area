@@ -2,11 +2,13 @@
 
 :root {
   --grey: #cccccc;
-  --grey-alt: #f2f2f2;
+  --grey-alt: #f0f0f0;
   --grey-alt-2: #dddddd;
   --lightgrey: #f7f7f7;
   --blue: #8888ff;
   --lightblue: #ccccff;
+  --darkred: #bb4444;
+  --darkgreen: #118811;
 }
 
 * {
@@ -81,8 +83,10 @@ input:focus {
   box-shadow: 0 0 0 3px var(--lightblue);
 }
 
-form > button {
-  margin-top: 20px;
+button {
+  display: inline-block;
+
+  margin: 20px 10px 0 0;
   padding: 5px 15px;
 
   font-size: 0.9rem;
@@ -94,4 +98,32 @@ form > button {
   background: var(--lightgrey);
 
   box-shadow: 0 1px var(--grey-alt-2), 0 -20px 10px inset var(--grey-alt);
+
+  cursor: pointer;
+}
+
+.error {
+  display: inline-block;
+
+  width: 300px;
+  max-width: 100%;
+
+  margin-top: 15px;
+
+  color: var(--darkred);
+
+  font-weight: bold;
+}
+
+.success {
+  display: inline-block;
+  
+  width: 300px;
+  max-width: 100%;
+
+  margin-top: 15px;
+
+  color: var(--darkgreen);
+
+  font-weight: bold;
 }
