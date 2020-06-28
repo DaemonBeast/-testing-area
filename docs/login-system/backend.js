@@ -35,6 +35,7 @@ function registerUser() {
   });
 }
 
+
 function loginUser() {
   const username = document.getElementById('loginUsername').value;
   const password = document.getElementById('loginPassword').value;
@@ -42,9 +43,30 @@ function loginUser() {
 
   Parse.User.logIn(username, password).then(user => {
     message('success', 'Logged in successfully.');
+    localStorage.setItem('user', JSON.stringify(user));
   }).catch(err => {
     message('error', 'An error occurred when logging in.');
   });
+}
+
+
+function logoutUser() {
+  Parse.User.logOut();
+  localStorage.setItem('user', false);
+}
+
+
+function checkStatus() {
+  let user = localStorage.getItem('user');
+  const message = messenger('loginStatus');
+
+  if (user !== 'false') {
+    user = JSON.parse(user);
+
+    message('', 'You are logged in as <b>' + user.username + '</b>.');
+  } else {
+    message('', 'You are not logged in.')
+  }
 }
 
 
@@ -53,3 +75,6 @@ initializeParse();
 
 document.getElementById('register').addEventListener('click', registerUser);
 document.getElementById('login').addEventListener('click', loginUser);
+document.getElementById('logout').addEventListener('click', logoutUser);
+
+checkStatus();
