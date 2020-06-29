@@ -43,7 +43,6 @@ function loginUser() {
 
   Parse.User.logIn(username, password).then(user => {
     message('success', 'Logged in successfully.');
-    localStorage.setItem('user', JSON.stringify(user));
   }).catch(err => {
     message('error', 'An error occurred when logging in.');
   });
@@ -52,18 +51,15 @@ function loginUser() {
 
 function logoutUser() {
   Parse.User.logOut();
-  localStorage.setItem('user', false);
 }
 
 
 function checkStatus() {
-  let user = localStorage.getItem('user');
+  let user = Parse.User.current();
   const message = messenger('loginStatus');
 
-  if (user !== 'false') {
-    user = JSON.parse(user);
-
-    message('', 'You are logged in as <b>' + user.username + '</b>.');
+  if (user) {
+    message('', 'You are logged in as <b>' + user.attributes.username + '</b>.');
   } else {
     message('', 'You are not logged in.')
   }
