@@ -22,7 +22,7 @@
   <span id="statusMessage" class="message"></span>
 
   <button id="logout" class="hidden">Log out</button>
-  <button id="delete" class="hidden">Delete account</button>
+  <button id="delete" class="hidden red">Delete account</button>
 
 
   <span id="loginForm" class="hidden">
@@ -53,6 +53,22 @@
       <span id="registerMessage" class="message"></span>
 
       <button id="register" type="button">Register</button>
+    </form>
+  </span>
+
+
+  <span id="updateForm" class="hidden">
+    <h2>Update Account</h2>
+    <form>
+      <label for="updateUsername">Username</label>
+      <input id="updateUsername" type="text" autocomplete="off">
+
+      <label for="updatePassword">Password</label>
+      <input id="updatePassword" type="password">
+
+      <span id="updateMessage" class="message"></span>
+
+      <button id="update" type="button">Update</button>
     </form>
   </span>
 

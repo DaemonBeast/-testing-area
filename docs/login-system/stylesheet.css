@@ -102,6 +102,7 @@ button {
   box-shadow: 0 1px var(--grey-alt-2), 0 -20px 10px inset var(--grey-alt);
 
   cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .error {
@@ -132,6 +133,10 @@ button {
 
 .hidden {
   display: none;
+}
+
+.red {
+  color: var(--darkred);
 }
 
 #loginStatus {
