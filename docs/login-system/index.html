@@ -15,35 +15,47 @@
     <h1>Login System</h1>
   </header>
 
+
   <h2>Status</h2>
   <span id="loginStatus">You are not logged in.</span>
-  <button id="logout">Log out</button>
 
-  <h2>Login</h2>
-  <form>
-    <label for="loginUsername">Username</label>
-    <input id="loginUsername" type="text" autocomplete="off">
+  <span id="statusMessage" class="message"></span>
 
-    <label for="loginPassword">Password</label>
-    <input id="loginPassword" type="password">
+  <button id="logout" class="hidden">Log out</button>
+  <button id="delete" class="hidden">Delete account</button>
 
-    <span id="loginMessage"></span>
 
-    <button id="login" type="button">Log in</button>
-  </form>
+  <span id="loginForm" class="hidden">
+    <h2>Login</h2>
+    <form>
+      <label for="loginUsername">Username</label>
+      <input id="loginUsername" type="text" autocomplete="off">
 
-  <h2>Register</h2>
-  <form>
-    <label for="registerUsername">Username</label>
-    <input id="registerUsername" type="text" autocomplete="off">
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" type="password">
 
-    <label for="registerPassword">Password</label>
-    <input id="registerPassword" type="password">
+      <span id="loginMessage" class="message"></span>
 
-    <span id="registerMessage"></span>
+      <button id="login" type="button">Log in</button>
+    </form>
+  </span>
 
-    <button id="register" type="button">Register</button>
-  </form>
+
+  <span id="registerForm" class="hidden">
+    <h2>Register</h2>
+    <form>
+      <label for="registerUsername">Username</label>
+      <input id="registerUsername" type="text" autocomplete="off">
+
+      <label for="registerPassword">Password</label>
+      <input id="registerPassword" type="password">
+
+      <span id="registerMessage" class="message"></span>
+
+      <button id="register" type="button">Register</button>
+    </form>
+  </span>
+
 
   <!-- SCRIPTS -->
   <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>

@@ -86,7 +86,7 @@ input:focus {
 }
 
 button {
-  display: block;
+  display: inline-block;
 
   margin: 20px 10px 0 0;
   padding: 5px 15px;
@@ -105,7 +105,7 @@ button {
 }
 
 .error {
-  display: inline-block;
+  display: block;
 
   width: 300px;
   max-width: 100%;
@@ -118,7 +118,7 @@ button {
 }
 
 .success {
-  display: inline-block;
+  display: block;
   
   width: 300px;
   max-width: 100%;
@@ -128,4 +128,12 @@ button {
   color: var(--darkgreen);
 
   font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+
+#loginStatus {
+  display: block;
 }

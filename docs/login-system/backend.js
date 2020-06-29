@@ -11,16 +11,39 @@ function messenger(element) {
 }
 
 
+function hide(...elements) {
+  elements.forEach(element => {
+    element.classList.add('hidden');
+
+    const form = element.getElementsByTagName('form')[0];
+    if (form) {
+      form.reset();
+    }
+
+    const message = element.getElementsByClassName('message');
+    [...message].forEach(element => {
+      element.innerHTML = '';
+    });
+  });
+}
+
+
+function show(...elements) {
+  elements.forEach(element => {
+    element.classList.remove('hidden');
+  });
+}
+
+
 function registerUser() {
   const username = document.getElementById('registerUsername').value;
   const password = document.getElementById('registerPassword').value;
-  let message = messenger('registerMessage');
 
   if (username.trim() === '' || password.trim() === '') {
-    message('error', 'A username and password is required.');
+    registerMessage('error', 'A username and password is required.');
     return;
   } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password)) {
-    message('error', 'The password must contain 8 characters, an uppercase letter, a lowercase letter and a number.');
+    registerMessage('error', 'The password must contain 8 characters, an uppercase letter, a lowercase letter and a number.');
     return;
   }
 
@@ -29,9 +52,12 @@ function registerUser() {
   user.set('password', password);
 
   user.signUp().then(user => {
-    message('success', 'Created account successfully.');
+    registerMessage('success', 'Created account successfully.');
+    statusMessage('', '');
+
+    checkStatus();
   }).catch(err => {
-    message('error', 'An error occurred when creating the account: ' + err);
+    registerMessage('error', 'An error occurred when creating the account: ' + err);
   });
 }
 
@@ -39,29 +65,55 @@ function registerUser() {
 function loginUser() {
   const username = document.getElementById('loginUsername').value;
   const password = document.getElementById('loginPassword').value;
-  let message = messenger('loginMessage');
 
   Parse.User.logIn(username, password).then(user => {
-    message('success', 'Logged in successfully.');
+    loginMessage('success', 'Logged in successfully.');
+    statusMessage('', '');
+
+    checkStatus();
   }).catch(err => {
-    message('error', 'An error occurred when logging in.');
+    loginMessage('error', 'An error occurred when logging in: ' + err);
   });
 }
 
 
 function logoutUser() {
-  Parse.User.logOut();
+  Parse.User.logOut().then(() => {
+    statusMessage('success', 'Logged out successfully.');
+
+    checkStatus();
+  }).catch(err => {
+    statusMessage('error', 'An error occurred when logging out: ' + err);
+  });
+}
+
+
+function deleteUser() {
+  account.destroy().then(() => {
+    statusMessage('success', 'Account deleted successfully.');
+
+    checkStatus();
+  }).catch(err => {
+    statusMessage('error', 'An error occurred when deleting your account: ' + err);
+  });
 }
 
 
 function checkStatus() {
   let user = Parse.User.current();
-  const message = messenger('loginStatus');
 
   if (user) {
-    message('', 'You are logged in as <b>' + user.attributes.username + '</b>.');
+    loginStatus('', 'You are logged in as <b>' + user.attributes.username + '</b>.');
+
+    hide(loginForm, registerForm);
+    show(logout, del);
+
+    account = user;
   } else {
-    message('', 'You are not logged in.')
+    loginStatus('', 'You are not logged in.')
+
+    hide(logout, del);
+    show(loginForm, registerForm);
   }
 }
 
@@ -69,8 +121,21 @@ function checkStatus() {
 
 initializeParse();
 
+const logout = document.getElementById('logout');
+const del = document.getElementById('delete');
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+
 document.getElementById('register').addEventListener('click', registerUser);
 document.getElementById('login').addEventListener('click', loginUser);
-document.getElementById('logout').addEventListener('click', logoutUser);
+logout.addEventListener('click', logoutUser);
+del.addEventListener('click', deleteUser);
+
+const registerMessage = messenger('registerMessage');
+const loginMessage = messenger('loginMessage');
+const statusMessage = messenger('statusMessage');
+const loginStatus = messenger('loginStatus');
+
+let account;
 
 checkStatus();
