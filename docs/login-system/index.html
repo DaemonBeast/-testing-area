@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1,minimum-scale=1">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kalam&family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap">
   <link rel="stylesheet" href="stylesheet.css">
 
   <title>Login System</title>
@@ -15,63 +15,86 @@
     <h1>Login System</h1>
   </header>
 
+  <div id="sections">
+    <div id="left">
+      <h2>Status</h2>
+      <span id="loginStatus">You are not logged in.</span>
 
-  <h2>Status</h2>
-  <span id="loginStatus">You are not logged in.</span>
+      <span id="statusMessage" class="message"></span>
 
-  <span id="statusMessage" class="message"></span>
-
-  <button id="logout" class="hidden">Log out</button>
-  <button id="delete" class="hidden red">Delete account</button>
-
-
-  <span id="loginForm" class="hidden">
-    <h2>Login</h2>
-    <form>
-      <label for="loginUsername">Username</label>
-      <input id="loginUsername" type="text" autocomplete="off">
-
-      <label for="loginPassword">Password</label>
-      <input id="loginPassword" type="password">
-
-      <span id="loginMessage" class="message"></span>
-
-      <button id="login" type="button">Log in</button>
-    </form>
-  </span>
+      <button id="logout" class="hidden">Log out</button>
+      <button id="delete" class="hidden red">Delete account</button>
 
 
-  <span id="registerForm" class="hidden">
-    <h2>Register</h2>
-    <form>
-      <label for="registerUsername">Username</label>
-      <input id="registerUsername" type="text" autocomplete="off">
+      <span id="loginForm" class="hidden">
+        <h2>Login</h2>
+        <form>
+          <label for="loginUsername">Username</label>
+          <input id="loginUsername" type="text" autocomplete="off">
 
-      <label for="registerPassword">Password</label>
-      <input id="registerPassword" type="password">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" type="password">
 
-      <span id="registerMessage" class="message"></span>
+          <span id="loginMessage" class="message"></span>
 
-      <button id="register" type="button">Register</button>
-    </form>
-  </span>
+          <button id="login" type="button">Log in</button>
+        </form>
+      </span>
 
 
-  <span id="updateForm" class="hidden">
-    <h2>Update Account</h2>
-    <form>
-      <label for="updateUsername">Username</label>
-      <input id="updateUsername" type="text" autocomplete="off">
+      <span id="registerForm" class="hidden">
+        <h2>Register</h2>
+        <form>
+          <label for="registerUsername">Username</label>
+          <input id="registerUsername" type="text" autocomplete="off">
 
-      <label for="updatePassword">Password</label>
-      <input id="updatePassword" type="password">
+          <label for="registerPassword">Password</label>
+          <input id="registerPassword" type="password">
 
-      <span id="updateMessage" class="message"></span>
+          <span id="registerMessage" class="message"></span>
 
-      <button id="update" type="button">Update</button>
-    </form>
-  </span>
+          <button id="register" type="button">Register</button>
+        </form>
+      </span>
 
+
+      <span id="updateForm" class="hidden">
+        <h2>Update Account</h2>
+        <form>
+          <label for="updateUsername">Username</label>
+          <input id="updateUsername" type="text" autocomplete="off">
+
+          <label for="updatePassword">Password</label>
+          <input id="updatePassword" type="password">
+
+          <span id="updateMessage" class="message"></span>
+
+          <button id="update" type="button">Update</button>
+        </form>
+      </span>
+    </div>
+
+
+    <div id="right">
+      <span id="notesWrapper" class="hidden">
+        <h2>New Note</h2>
+        <form>
+          <label for="noteTitle">Title</label>
+          <input id="noteTitle" type="text" autocomplete="off">
+
+          <label for="noteBody">Body</label>
+          <textarea id="noteBody" rows="5"></textarea>
+
+          <span id="noteMessage" class="message"></span>
+
+          <button id="newNote" type="button">Create</button>
+        </form>
+
+        <h2>Notes</h2>
+        <div id="notes"></div>
+      </span>
+    </div>
+  </div>
 
   <!-- SCRIPTS -->
   <script src="https://npmcdn.com/parse/dist/parse.min.js"></script>

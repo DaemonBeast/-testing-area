@@ -23,6 +23,8 @@ h1 {
 .test {
     display: flex;
     flex-wrap: wrap;
+
+    margin: 20px 0;
 }
 
 .test > a {

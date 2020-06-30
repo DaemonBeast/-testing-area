@@ -127,23 +127,92 @@ function updateUser() {
 }
 
 
+function createNote() {
+  const title = document.getElementById('noteTitle').value;
+  const body = document.getElementById('noteBody').value;
+
+  if (title.trim() === '' || body.trim() === '') {
+    noteMessage('error', 'A title and body is required.');
+    return;
+  }
+
+  const Notes = Parse.Object.extend('Notes');
+  const note = new Notes();
+
+  note.set('title', title);
+  note.set('body', body);
+  note.set('user', account);
+  note.setACL(new Parse.ACL(Parse.User.current()));
+
+
+  note.save().then(() => {
+    noteMessage('success', 'Note created successfully.');
+
+    const noteElement = document.createElement('div');
+    const noteTitle = document.createElement('b');
+    const noteBody = document.createElement('p');
+
+    noteElement.classList.add('note');
+    noteTitle.textContent = title;
+    noteBody.textContent = body;
+    noteElement.append(noteTitle, noteBody);
+
+    notes.prepend(noteElement);
+  }).catch(err => {
+    noteMessage('error', 'An error occurred when creating the note: ' + err);
+  });
+}
+
+
+async function getNotes() {
+  const Notes = Parse.Object.extend('Notes');
+  const query = new Parse.Query(Notes);
+
+  query.equalTo('user', account);
+
+  const userNotes = await query.find();
+
+  const queuedNotes = document.createDocumentFragment();
+
+  userNotes.forEach(userNote => {
+    const noteElement = document.createElement('div');
+    const noteTitle = document.createElement('b');
+    const noteBody = document.createElement('p');
+
+    noteElement.classList.add('note');
+    noteTitle.textContent = userNote.get('title');
+    noteBody.textContent = userNote.get('body');
+    noteElement.append(noteTitle, noteBody);
+
+    queuedNotes.prepend(noteElement);
+  });
+
+  notes.innerHTML = '';
+  notes.appendChild(queuedNotes);
+}
+
+
 function checkStatus() {
   let user = Parse.User.current();
 
   if (user) {
     loginStatus('', 'You are logged in as <b>' + user.attributes.username + '</b>.');
 
-    hide(loginForm, registerForm);
-    show(logout, del, updateForm);
-
     account = user;
+
+    hide(loginForm, registerForm);
+    show(logout, del, updateForm, notesWrapper);
+
+    getNotes();
   } else {
     loginStatus('', 'You are not logged in.');
 
-    hide(logout, del, updateForm);
+    account = null;
+
+    hide(logout, del, updateForm, notesWrapper);
     show(loginForm, registerForm);
 
-    account = null;
+    notes.innerHTML = '';
   }
 }
 
@@ -156,18 +225,23 @@ const del = document.getElementById('delete');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 const updateForm = document.getElementById('updateForm');
+const notesWrapper = document.getElementById('notesWrapper');
+const newNote = document.getElementById('newNote');
+const notes = document.getElementById('notes');
 
 document.getElementById('register').addEventListener('click', registerUser);
 document.getElementById('login').addEventListener('click', loginUser);
 logout.addEventListener('click', logoutUser);
 del.addEventListener('click', deleteUser);
 document.getElementById('update').addEventListener('click', updateUser);
+newNote.addEventListener('click', createNote);
 
 const registerMessage = messenger('registerMessage');
 const loginMessage = messenger('loginMessage');
 const statusMessage = messenger('statusMessage');
 const loginStatus = messenger('loginStatus');
-const updateMessage= messenger('updateMessage');
+const updateMessage = messenger('updateMessage');
+const noteMessage = messenger('noteMessage');
 
 let account;
 

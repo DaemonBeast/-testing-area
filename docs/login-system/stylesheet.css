@@ -9,6 +9,7 @@
   --lightblue: #ccccff;
   --darkred: #bb4444;
   --darkgreen: #118811;
+  --yellow: #eeee99;
 }
 
 * {
@@ -63,7 +64,7 @@ label {
   font-weight: bold;
 }
 
-input {
+input, textarea {
   width: 100%;
   max-width: 300px;
 
@@ -74,10 +75,11 @@ input {
 
   background: var(--lightgrey);
 
+  resize: none;
   -webkit-appearance: none;
 }
 
-input:focus {
+input:focus, textarea:focus {
   outline: none;
 
   border-color: var(--blue);
@@ -100,10 +102,13 @@ button {
   background: var(--lightgrey);
 
   box-shadow: 0 1px var(--grey-alt-2), 0 -20px 10px inset var(--grey-alt);
+  -webkit-box-shadow: 0 1px var(--grey-alt-2), 0 -20px 10px inset var(--grey-alt);
 
   cursor: pointer;
   -webkit-appearance: none;
 }
+
+/* SPECIFIC STYLING */
 
 .error {
   display: block;
@@ -131,6 +136,19 @@ button {
   font-weight: bold;
 }
 
+.note {
+  margin: 20px 0;
+  padding: 10px;
+
+  background: var(--yellow);
+
+  box-shadow: 0 0 5px 2px var(--grey);
+}
+
+.note > * {
+  font-family: 'Kalam', cursive;
+}
+
 .hidden {
   display: none;
 }
@@ -141,4 +159,17 @@ button {
 
 #loginStatus {
   display: block;
+}
+
+#sections {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#left {
+  flex: 0 1 500px;
+}
+
+#right {
+  flex: 0 1 600px;
 }
